@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deploy
+  labels:
+    app: django-app-deploy
+spec:
+  selector:
+    matchLabels:
+      project: django-app
+  template:
+    metadata:
+      labels:
+        project: django-app
+    spec:
+      containers:
+        - name : django-app
+          image: django_app:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 80  
+          envFrom:    
+          - configMapRef:
+              name: django-app-config
+
