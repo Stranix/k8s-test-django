@@ -35,6 +35,11 @@ $ docker-compose run web ./manage.py createsuperuser
 
 ## Запуск в кластере Kubernetes (minikube)
  - Устанавливаем и запускаем [minikube](https://kubernetes.io/ru/docs/tasks/tools/install-minikube/) 
+ - Создаем docker image приложения
+ ```shell
+eval $(minikube docker-env)
+docker build -f ./backend_main_django/Dockerfile -t django_app:latest .
+```
  - Запускаем в кластере БД PostgreSQL с помощью  [helm](https://helm.sh/ru/docs/intro/install/)
 ```shell
 # Запуск PostgreSQL
